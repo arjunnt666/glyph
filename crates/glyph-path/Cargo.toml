@@ -1,0 +1,10 @@
+[package]
+name = "glyph-path"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+glyph-core = { path = "../glyph-core" }
+serde = { workspace = true }
+smallvec = { workspace = true }
