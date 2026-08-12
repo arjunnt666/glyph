@@ -1,0 +1,36 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/glyph-core",
+    "crates/glyph-layout",
+    "crates/glyph-path",
+    "crates/glyph-text",
+    "crates/glyph-paint",
+    "crates/glyph-scene",
+    "crates/glyph-render",
+    "crates/glyph-wasm",
+    "crates/glyph-cli",
+]
+default-members = ["crates/glyph-cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/arjunnt666/glyph"
+authors = ["Arjun NT"]
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "1"
+anyhow = "1"
+tracing = "0.1"
+smallvec = "1"
+euclid = "0.22"
+kurbo = "0.11"
+font-types = "0.5"
+
+[profile.release]
+lto = true
+codegen-units = 1
