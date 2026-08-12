@@ -1,0 +1,16 @@
+[package]
+name = "glyph-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "glyph"
+path = "src/main.rs"
+
+[dependencies]
+glyph-core = { path = "../glyph-core" }
+glyph-scene = { path = "../glyph-scene" }
+glyph-render = { path = "../glyph-render" }
+anyhow = { workspace = true }
+clap = { version = "4", features = ["derive"] }

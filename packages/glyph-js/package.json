@@ -1,0 +1,9 @@
+{
+  "name": "@glyph/js",
+  "version": "0.1.0",
+  "description": "JS bindings for Glyph 2d graphics engine (stub)",
+  "main": "dist/index.js",
+  "scripts": { "build": "tsc", "test": "echo no tests yet" },
+  "license": "MIT",
+  "devDependencies": { "typescript": "^5.0.0" }
+}

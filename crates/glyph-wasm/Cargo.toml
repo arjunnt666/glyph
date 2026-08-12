@@ -1,0 +1,14 @@
+[package]
+name = "glyph-wasm"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+glyph-core = { path = "../glyph-core" }
+glyph-layout = { path = "../glyph-layout" }
+glyph-scene = { path = "../glyph-scene" }
+glyph-render = { path = "../glyph-render" }

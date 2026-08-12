@@ -1,0 +1,13 @@
+[package]
+name = "glyph-scene"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+glyph-core = { path = "../glyph-core" }
+glyph-path = { path = "../glyph-path" }
+glyph-text = { path = "../glyph-text" }
+glyph-paint = { path = "../glyph-paint" }
+glyph-layout = { path = "../glyph-layout" }
+serde = { workspace = true }
