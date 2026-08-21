@@ -1,12 +1,13 @@
 # Changelog
 
-## 0.1.1 — unreleased
+## 0.1.2
 
-- document naive shaper limits (no bidi, no font fallback)
-- note tessellation returns empty vertex lists until implemented
-- clarify svg backend emits structure only
+- STATUS.md
+
+## 0.1.1
+
+- text limits, roadmap
 
 ## 0.1.0
 
 - initial public skeleton
-- layout, path, text, paint, scene, render crates
