@@ -1,13 +1,11 @@
 # Status
 
-## diagnosis
-Layout / path / text / paint crates sketch a 2d pipeline. Text shaping and tessellation are intentionally incomplete.
+## works today
+- rect contains-point
+- path types serialize
+- workspace compiles
 
-## works as design notes
-- crate map and text limitation docs
+## still sketched
+- complex text, gpu tessellation
 
-## does not work as production software
-- real bidi / complex text
-- production raster or gpu path
-
-API surface for exploration, not a renderer ship.
+CI fails if cargo test fails.

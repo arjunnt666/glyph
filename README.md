@@ -1,10 +1,27 @@
 # glyph
 
-2d vector graphics + layout sketch. flex-ish layout, paths, text, paint. wasm friendly in intent.
+2d layout + paths without pretending to be a browser.
 
-not a browser. text shaping is incomplete on purpose until there is a real need.
+points, rects, path commands, a scene graph sketch. text shaping is still the thing we refuse to fake.
 
-see STATUS.md.
+## works today
+
+- rect contains-point
+- path command lists
+- `glyph version`
+
+## does not work yet
+
+- complex text / bidi
+- gpu tessellation you would ship
+
+## try it
+
+```bash
+cargo test --workspace
+cargo build -p glyph-cli
+./target/debug/glyph version
+```
 
 ## license
 

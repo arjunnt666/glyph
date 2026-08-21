@@ -12,9 +12,12 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
+    /// Emit a minimal empty SVG
     Svg {
-        #[arg(long, default_value = "400")] width: f32,
-        #[arg(long, default_value = "300")] height: f32,
+        #[arg(long, default_value = "400")]
+        width: f32,
+        #[arg(long, default_value = "300")]
+        height: f32,
     },
     Version,
 }
@@ -28,7 +31,9 @@ fn main() -> anyhow::Result<()> {
             let bytes = r.render(&scene, Size::new(width, height))?;
             println!("{}", String::from_utf8_lossy(&bytes));
         }
-        Commands::Version => println!("glyph 0.1.0"),
+        Commands::Version => {
+            println!("glyph 0.1.0");
+        }
     }
     Ok(())
 }

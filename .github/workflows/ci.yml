@@ -9,39 +9,13 @@ on:
 jobs:
   rust:
     runs-on: ubuntu-latest
-    continue-on-error: true
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - name: cargo check
-        run: cargo check --workspace || true
       - name: cargo test
-        run: cargo test --workspace -- --nocapture || true
-
-  js:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - name: install + build
-        working-directory: packages/glyph-js
+        run: cargo test --workspace -- --nocapture
+      - name: cli smoke
         run: |
-          npm install || true
-          npm run build || true
-
-  python:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: syntax check
-        run: python -m py_compile packages/glyph-python/src/glyph/__init__.py || true
+          cargo build -p glyph-cli
+          ./target/debug/glyph version
