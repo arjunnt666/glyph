@@ -8,4 +8,6 @@ license.workspace = true
 glyph-core = { path = "../glyph-core" }
 glyph-scene = { path = "../glyph-scene" }
 glyph-path = { path = "../glyph-path" }
+glyph-paint = { path = "../glyph-paint" }
+glyph-text = { path = "../glyph-text" }
 serde = { workspace = true }

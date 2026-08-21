@@ -19,3 +19,4 @@ jobs:
         run: |
           cargo build -p glyph-cli
           ./target/debug/glyph version
+          ./target/debug/glyph svg --width 80 --height 60 | grep -q '<path'

@@ -1,7 +1,9 @@
 use clap::{Parser, Subcommand};
-use glyph_core::Size;
-use glyph_render::{SvgRenderer, Renderer};
-use glyph_scene::Scene;
+use glyph_core::{Color, Rgba, Size};
+use glyph_paint::{Fill, FillRule, Paint};
+use glyph_path::Path;
+use glyph_render::{Renderer, SvgRenderer};
+use glyph_scene::{Scene, SceneNode};
 
 #[derive(Parser)]
 #[command(name = "glyph", about = "glyph 2d graphics tooling")]
@@ -12,7 +14,7 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Emit a minimal empty SVG
+    /// Draw a couple of rectangles as SVG
     Svg {
         #[arg(long, default_value = "400")]
         width: f32,
@@ -22,12 +24,34 @@ enum Commands {
     Version,
 }
 
+fn fill(r: f32, g: f32, b: f32) -> Paint {
+    Paint::Fill(Fill {
+        color: Color::Solid(Rgba::rgb(r, g, b)),
+        rule: FillRule::NonZero,
+    })
+}
+
 fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
     match cli.command {
         Commands::Svg { width, height } => {
             let mut r = SvgRenderer::new();
-            let scene = Scene::new();
+            let mut scene = Scene::new();
+            scene.set_root(SceneNode::Group {
+                transform: Default::default(),
+                children: vec![
+                    SceneNode::Path {
+                        path: Path::rect(24.0, 24.0, width - 48.0, 64.0),
+                        paint: fill(0.15, 0.45, 0.85),
+                        transform: Default::default(),
+                    },
+                    SceneNode::Path {
+                        path: Path::rect(24.0, 104.0, width / 2.0, 48.0),
+                        paint: fill(0.9, 0.35, 0.2),
+                        transform: Default::default(),
+                    },
+                ],
+            });
             let bytes = r.render(&scene, Size::new(width, height))?;
             println!("{}", String::from_utf8_lossy(&bytes));
         }

@@ -12,5 +12,7 @@ path = "src/main.rs"
 glyph-core = { path = "../glyph-core" }
 glyph-scene = { path = "../glyph-scene" }
 glyph-render = { path = "../glyph-render" }
+glyph-path = { path = "../glyph-path" }
+glyph-paint = { path = "../glyph-paint" }
 anyhow = { workspace = true }
 clap = { version = "4", features = ["derive"] }
