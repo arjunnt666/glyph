@@ -77,7 +77,35 @@ impl Path {
             })
             .collect())
     }
+
+    /// Axis-aligned bounds of move/line points. None if the path is empty.
+    pub fn bounds(&self) -> Option<(f32, f32, f32, f32)> {
+        let mut min_x = f32::INFINITY;
+        let mut min_y = f32::INFINITY;
+        let mut max_x = f32::NEG_INFINITY;
+        let mut max_y = f32::NEG_INFINITY;
+        let mut any = false;
+        for cmd in &self.cmds {
+            let p = match cmd {
+                PathCmd::MoveTo(p) | PathCmd::LineTo(p) => *p,
+                PathCmd::QuadTo(_, p) | PathCmd::CubicTo(_, _, p) => *p,
+                PathCmd::ArcTo { to, .. } => *to,
+                PathCmd::Close => continue,
+            };
+            any = true;
+            min_x = min_x.min(p.x);
+            min_y = min_y.min(p.y);
+            max_x = max_x.max(p.x);
+            max_y = max_y.max(p.y);
+        }
+        if any {
+            Some((min_x, min_y, max_x, max_y))
+        } else {
+            None
+        }
+    }
 }
+
 
 #[cfg(test)]
 mod tests {
@@ -89,4 +117,12 @@ mod tests {
         assert!(p.to_svg_d().contains("Z"));
         assert!(p.to_svg_d().contains("M 0 0"));
     }
+
+    #[test]
+    fn rect_bounds() {
+        let p = Path::rect(10.0, 20.0, 40.0, 15.0);
+        let (x0, y0, x1, y1) = p.bounds().unwrap();
+        assert_eq!((x0, y0, x1, y1), (10.0, 20.0, 50.0, 35.0));
+    }
 }
+
